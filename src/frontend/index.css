@@ -1,0 +1,201 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Font Face Declarations ───────────────────────────────────── */
+@font-face {
+  font-family: "Playfair Display";
+  src: url("/assets/fonts/PlayfairDisplay[wght].woff2") format("woff2");
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("/assets/fonts/PlusJakartaSans[wght].woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fraunces";
+  src: url("/assets/fonts/Fraunces[SOFT,WONK,opsz,wght].woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── Design Tokens — Ilmora Academy ──────────────────────────── */
+/* Deep forest green + ivory white + burnished gold */
+@layer base {
+  :root {
+    --radius: 0.5rem;
+
+    /* Core palette */
+    /* Forest Green – primary brand */
+    --primary: 0.34 0.1 155;
+    --primary-foreground: 0.98 0 0;
+
+    /* Gold accent */
+    --accent: 0.71 0.12 75;
+    --accent-foreground: 0.16 0.02 155;
+
+    /* Backgrounds */
+    --background: 0.98 0.005 90;
+    --foreground: 0.16 0.02 155;
+
+    /* Card */
+    --card: 1 0 0;
+    --card-foreground: 0.16 0.02 155;
+
+    /* Popover */
+    --popover: 1 0 0;
+    --popover-foreground: 0.16 0.02 155;
+
+    /* Secondary (muted green tint) */
+    --secondary: 0.95 0.018 155;
+    --secondary-foreground: 0.25 0.08 155;
+
+    /* Muted */
+    --muted: 0.94 0.012 90;
+    --muted-foreground: 0.46 0.03 155;
+
+    /* Destructive */
+    --destructive: 0.577 0.245 27.325;
+    --destructive-foreground: 0.985 0 0;
+
+    /* Border / Input / Ring */
+    --border: 0.88 0.02 155;
+    --input: 0.88 0.02 155;
+    --ring: 0.34 0.1 155;
+
+    /* Chart colors */
+    --chart-1: 0.34 0.1 155;
+    --chart-2: 0.71 0.12 75;
+    --chart-3: 0.55 0.1 155;
+    --chart-4: 0.82 0.09 75;
+    --chart-5: 0.25 0.08 155;
+
+    /* Sidebar */
+    --sidebar: 0.16 0.05 155;
+    --sidebar-foreground: 0.98 0 0;
+    --sidebar-primary: 0.71 0.12 75;
+    --sidebar-primary-foreground: 0.16 0.02 155;
+    --sidebar-accent: 0.25 0.08 155;
+    --sidebar-accent-foreground: 0.98 0 0;
+    --sidebar-border: 0.25 0.08 155;
+    --sidebar-ring: 0.71 0.12 75;
+
+    /* Custom brand tokens */
+    --green-deep: 0.25 0.1 155;
+    --green-mid: 0.34 0.1 155;
+    --green-light: 0.88 0.04 155;
+    --gold: 0.71 0.12 75;
+    --gold-deep: 0.58 0.11 72;
+    --gold-light: 0.88 0.07 80;
+    --ivory: 0.97 0.008 90;
+    --ivory-dark: 0.93 0.015 90;
+  }
+}
+
+/* ── Global Base Styles ───────────────────────────────────────── */
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: "Playfair Display", serif;
+  }
+}
+
+/* ── Islamic Geometric Pattern (CSS) ─────────────────────────── */
+@layer utilities {
+  .geometric-bg {
+    position: relative;
+  }
+  .geometric-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('/assets/generated/geometric-pattern-bg-transparent.dim_1200x800.png');
+    background-size: 480px auto;
+    background-repeat: repeat;
+    opacity: 0.06;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .geometric-bg > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .geometric-bg-white::before {
+    opacity: 0.04;
+  }
+
+  .gold-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: oklch(var(--gold));
+  }
+  .gold-divider::before,
+  .gold-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, oklch(var(--gold)), transparent);
+  }
+
+  .text-gradient-green {
+    background: linear-gradient(135deg, oklch(var(--green-deep)), oklch(var(--green-mid)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-gold {
+    background: linear-gradient(135deg, oklch(var(--gold-deep)), oklch(var(--gold)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .btn-gold {
+    background: linear-gradient(135deg, oklch(var(--gold-deep)), oklch(var(--gold)));
+    color: oklch(var(--green-deep));
+    font-weight: 700;
+    transition: all 0.2s ease;
+  }
+  .btn-gold:hover {
+    background: linear-gradient(135deg, oklch(var(--gold)), oklch(var(--gold-light)));
+    box-shadow: 0 4px 20px oklch(var(--gold) / 0.4);
+    transform: translateY(-1px);
+  }
+
+  .btn-green {
+    background: oklch(var(--green-mid));
+    color: oklch(var(--primary-foreground));
+    font-weight: 700;
+    transition: all 0.2s ease;
+  }
+  .btn-green:hover {
+    background: oklch(var(--green-deep));
+    box-shadow: 0 4px 20px oklch(var(--green-mid) / 0.3);
+    transform: translateY(-1px);
+  }
+}
